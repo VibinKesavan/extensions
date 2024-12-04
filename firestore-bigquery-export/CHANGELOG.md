@@ -1,3 +1,8 @@
+## Version 0.1.59
+
+Added Document Fields as Partition Fields
+Added Document Fields as Clustering Fields
+
 ## Version 0.1.56
 
 feat - improve sync strategy by immediately writing to BQ, and using cloud tasks only as a last resort
