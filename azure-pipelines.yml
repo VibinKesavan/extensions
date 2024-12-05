@@ -1,63 +1,62 @@
 trigger:
   branches:
     include:
-    - staging
-    - develop
+      - staging
+      - develop
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
-- name: buildToken
-  ${{ if eq(variables['Build.SourceBranchName'], 'next') }}: 
-    value: 'prod'
-  ${{ if eq(variables['Build.SourceBranchName'], 'staging') }}: 
-    value: 'staging'
-  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}: 
-    value: 'develop'
-- name: firebaseProjectId
-  ${{ if eq(variables['Build.SourceBranchName'], 'next') }}: 
-    value: 'pos-prod-35f28'
-  ${{ if eq(variables['Build.SourceBranchName'], 'staging') }}: 
-    value: 'pos-staging-d2244'
-  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}: 
-    value: 'pos-dev-47526'
+  - name: buildToken
+    ${{ if eq(variables['Build.SourceBranchName'], 'next') }}:
+      value: "prod"
+    ${{ if eq(variables['Build.SourceBranchName'], 'staging') }}:
+      value: "staging"
+    ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+      value: "develop"
+  - name: firebaseProjectId
+    ${{ if eq(variables['Build.SourceBranchName'], 'next') }}:
+      value: "pos-prod-35f28"
+    ${{ if eq(variables['Build.SourceBranchName'], 'staging') }}:
+      value: "pos-staging-d2244"
+    ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+      value: "pos-dev-47526"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x'
-  displayName: 'Install Node.js'
-  
-- script: |
-    npm install -g firebase-tools
-  displayName: 'Install firebase tools'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "18.x"
+    displayName: "Install Node.js"
 
-- script: |
-    echo "Cloning custom Firebase extension from GitHub... $(firebaseProjectId)"
-    git clone --branch next https://github.com/VibinKesavan/extensions.git
-  displayName: 'Clone Extension Repository'
+  - script: |
+      npm install -g firebase-tools
+    displayName: "Install firebase tools"
 
-- script: |
-    echo "Deploying Firebase Extension from custom GitHub branch... $(firebaseProjectId)"
-    firebase ext:install ./extensions/firestore-bigquery-export \
-          --param=BIGQUERY_PROJECT_ID=$(firebaseProjectId) \
-          --param=CLUSTERING="tenant_id" \
-          --param=COLLECTION_PATH="clients/{clientId}/salesorders" \
-          --param=DATASET_ID="pos_main" \
-          --param=DATASET_LOCATION="europe-west2" \
-          --param=EXCLUDE_OLD_DATA="yes" \
-          --param=firebaseextensions.v1beta.function/location="europe-west2" \
-          --param=MAX_DISPATCHES_PER_SECOND=100 \
-          --param=MAX_ENQUEUE_ATTEMPTS=3 \
-          --param=TABLE_ID="tbl_sale_orders" \
-          --param=TABLE_PARTITIONING="MONTH" \
-          --param=TIME_PARTITIONING_FIELD="createdDate" \
-          --param=TIME_PARTITIONING_FIELD_TYPE="TIMESTAMP" \
-          --param=TIME_PARTITIONING_FIRESTORE_FIELD="createdDate" \
-          --param=USE_NEW_SNAPSHOT_QUERY_SYNTAX="yes" \
-          --param=WILDCARD_IDS="true" \
-          --project=$(firebaseProjectId) --token $(FIREBASE_TOKEN) --force
-  env:
-    FIREBASE_PROJECT_ID: $(firebaseProjectId)
-  displayName: 'Deploy Firebase Extensions'
+  - script: |
+      echo "Cloning custom Firebase extension from GitHub... $(firebaseProjectId)"
+      git clone --branch next https://github.com/VibinKesavan/extensions.git
+    displayName: "Clone Extension Repository"
+
+  - script: |
+      echo "Deploying Firebase Extension from custom GitHub branch... $(firebaseProjectId)"
+      firebase ext:install ./extensions/firestore-bigquery-export \
+            --param=BIGQUERY_PROJECT_ID=$(firebaseProjectId) \
+            --param=COLLECTION_PATH="clients/{clientId}/salesorders" \
+            --param=DATASET_ID="pos_main" \
+            --param=DATASET_LOCATION="europe-west2" \
+            --param=EXCLUDE_OLD_DATA="yes" \
+            --param=firebaseextensions.v1beta.function/location="europe-west2" \
+            --param=MAX_DISPATCHES_PER_SECOND=100 \
+            --param=MAX_ENQUEUE_ATTEMPTS=3 \
+            --param=TABLE_ID="tbl_sale_orders" \
+            --param=TABLE_PARTITIONING="MONTH" \
+            --param=TIME_PARTITIONING_FIELD="createdDate" \
+            --param=TIME_PARTITIONING_FIELD_TYPE="TIMESTAMP" \
+            --param=TIME_PARTITIONING_FIRESTORE_FIELD="createdDate" \
+            --param=USE_NEW_SNAPSHOT_QUERY_SYNTAX="yes" \
+            --param=WILDCARD_IDS="true" \
+            --project=$(firebaseProjectId) --token $(FIREBASE_TOKEN) --force
+    env:
+      FIREBASE_PROJECT_ID: $(firebaseProjectId)
+    displayName: "Deploy Firebase Extensions"

@@ -91,13 +91,6 @@ export const oldDataField = {
     "The full JSON representation of the document state before the indicated operation is applied. This field will be null for CREATE operations.",
 };
 
-export const tenantIdField = {
-  name: "tenant_id",
-  mode: "NULLABLE",
-  type: "STRING",
-  description: "To Support Multi-Tenent Databases",
-};
-
 /*
  * We cannot specify a schema for view creation, and all view columns default
  * to the NULLABLE mode.
@@ -147,7 +140,6 @@ export const RawChangelogViewSchema = {
         "The full JSON representation of the document state before the indicated operation is applied.",
     },
     documentIdField,
-    tenantIdField,
   ],
 };
 
@@ -195,7 +187,6 @@ export const RawChangelogSchema = {
         "The full JSON representation of the document state before the indicated operation is applied. This field will be null for CREATE operations.",
     },
     documentIdField,
-    tenantIdField,
   ],
 };
 

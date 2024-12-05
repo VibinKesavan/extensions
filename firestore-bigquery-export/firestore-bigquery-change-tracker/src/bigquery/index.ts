@@ -24,7 +24,6 @@ import {
   documentIdField,
   oldDataField,
   documentPathParams,
-  tenantIdField,
 } from "./schema";
 import { latestConsistentSnapshotView } from "./snapshot";
 import handleFailedTransactions from "./handleFailedTransactions";
@@ -111,7 +110,6 @@ export class FirestoreBigQueryEventHistoryTracker
           event_id: event.eventId,
           document_name: event.documentName,
           document_id: event.documentId,
-          tenant_id: this.getTenantId(event.documentName),
           operation: ChangeType[event.operation],
           data: JSON.stringify(this.serializeData(event.data)),
           old_data: event.oldData
@@ -132,7 +130,7 @@ export class FirestoreBigQueryEventHistoryTracker
   getTenantId(document_name) {
     const regex = /clients\/([^\/]+)/;
     const match = document_name.match(regex);
-    const tenantid = match ? match[1] : 'INVALID';
+    const tenantid = match ? match[1] : "INVALID";
     return tenantid;
   }
 
@@ -358,10 +356,6 @@ export class FirestoreBigQueryEventHistoryTracker
         (column) => column.name === "old_data"
       );
 
-      const tenantIdExists = fields.find(
-        (column) => column.name === "tenant_id"
-      );
-
       if (!oldDataColExists) {
         fields.push(oldDataField);
         logs.addNewColumn(this.rawChangeLogTableName(), oldDataField.name);
@@ -380,11 +374,6 @@ export class FirestoreBigQueryEventHistoryTracker
         );
       }
 
-      if (!tenantIdExists) {
-        fields.push(tenantIdField);
-        logs.addNewColumn(this.rawChangeLogTableName(), tenantIdField.name);
-      }
-
       /** Updated table metadata if required */
       const shouldUpdate = await tableRequiresUpdate({
         table,
@@ -400,8 +389,8 @@ export class FirestoreBigQueryEventHistoryTracker
 
         /** update table metadata with changes. */
         logs.bigQueryTableSchema(metadata);
-        await table.setMetadata(metadata);        
-        
+        await table.setMetadata(metadata);
+
         logs.updatingMetadata(this.rawChangeLogTableName(), {
           config: this.config,
           documentIdColExists,
