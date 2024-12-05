@@ -1,3 +1,7 @@
+## Version 0.1.61
+
+Removing Tenant Id
+
 ## Version 0.1.60
 
 Added Document Fields as Partition Fields
