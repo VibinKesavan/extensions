@@ -457,10 +457,6 @@ export class FirestoreBigQueryEventHistoryTracker
     const schema = RawChangelogViewSchema;
     const clusterFields = getClusteringFields(this.config);
 
-    const changelogName = this.rawChangeLogTableName();
-    const table = dataset.table(changelogName);
-    const partitioning = new Partitioning(this.config, table);
-
     if (viewExists) {
       logs.bigQueryViewAlreadyExists(view.id, dataset.id);
       const [metadata] = await view.getMetadata();

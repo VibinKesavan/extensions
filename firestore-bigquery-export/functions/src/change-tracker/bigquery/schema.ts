@@ -208,6 +208,9 @@ export const getClusteringFields = (
   config: FirestoreBigQueryEventHistoryTrackerConfig
 ) => {
   const { clustering } = config;
+
+  if (!clustering) return [];
+
   return clustering.slice(0, 4).map((fieldName) => ({
     name: fieldName,
     mode: "NULLABLE",
