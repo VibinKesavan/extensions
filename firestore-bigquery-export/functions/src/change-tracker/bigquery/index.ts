@@ -519,6 +519,12 @@ export class FirestoreBigQueryEventHistoryTracker
         schema.fields.push(documentPathParams);
       }
 
+      logs.bigQueryPartitionFieldAdding();
+      if (!!this.config.timePartitioning) {
+        schema.fields.push(getNewPartitionField(this.config));
+        logs.bigQueryPartitionFieldAddedToView(schema);
+      }
+
       logs.bigQueryCreateViewSchema(schema);
       const latestSnapshot = latestConsistentSnapshotView({
         datasetId: this.config.datasetId,
@@ -527,6 +533,7 @@ export class FirestoreBigQueryEventHistoryTracker
         bqProjectId: this.bq.projectId,
         useLegacyQuery: !this.config.useNewSnapshotQuerySyntax,
       });
+
       logs.bigQueryViewCreating(this.rawLatestView(), latestSnapshot.query);
       const options: TableMetadata = {
         friendlyName: this.rawLatestView(),
