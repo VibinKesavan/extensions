@@ -47,7 +47,7 @@ export const bigQuerySchemaViewCreated = (name: string) => {
 };
 
 export const bigQueryCreateViewSchema = (schema: any) => {
-  logger.log(`$$$Creating BigQuery View Schema : ${JSON.stringify(schema)}`);
+  logger.log(`$$$@@Creating BigQuery View Schema : ${JSON.stringify(schema)}`);
 };
 
 export const bigQueryPartitionFieldAddedToView = (schema: any) => {
