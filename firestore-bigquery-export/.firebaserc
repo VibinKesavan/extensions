@@ -6,7 +6,7 @@
   "etags": {
     "pos-dev-47526": {
       "extensionInstances": {
-        "firestore-bq-export-with-cls": "73529ed002806826d45600b12ee5cab179c131b87ad3c16a77a98d59eb0d1106"
+        "firestore-bq-export-with-cls": "2a27a1fe2d1d84e951baf73d2a8eba62a1061cc5466323e6ee8ae3286a07b841"
       }
     }
   },
