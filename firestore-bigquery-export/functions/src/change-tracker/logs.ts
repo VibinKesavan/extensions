@@ -54,6 +54,10 @@ export const bigQueryPartitionFieldAddedToView = (schema: any) => {
   logger.log(`$$$Partition Field added to View : ${JSON.stringify(schema)}`);
 };
 
+export const bigQueryPartitionFieldAdding = () => {
+  logger.log(`$$$$Adding Partition Field to view`);
+};
+
 export const bigQueryTableAlreadyExists = (
   tableName: string,
   datasetName: string

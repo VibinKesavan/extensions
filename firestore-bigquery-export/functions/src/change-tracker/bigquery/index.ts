@@ -472,6 +472,7 @@ export class FirestoreBigQueryEventHistoryTracker
         schema.fields.push(documentPathParams);
       }
 
+      logs.bigQueryPartitionFieldAdding();
       if (!!this.config.timePartitioning) {
         schema.fields.push(getNewPartitionField(this.config));
         logs.bigQueryPartitionFieldAddedToView(schema);

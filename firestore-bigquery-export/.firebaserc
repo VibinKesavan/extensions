@@ -6,11 +6,7 @@
   "etags": {
     "pos-dev-47526": {
       "extensionInstances": {
-        "export-expenses-bigquery": "e0676371d97ab18b7cd5bbfc9cacb4bed01e28ffdf7b016b11d6367adccb57ab",
-        "export-inventory-bigquery": "a0068da225007fb86bd725d18cb16b9f17bc212a0335684044a3db5c87c296ce",
-        "export-saleorders-bigquery": "b4dd3d454dec71269e26a1158116216745d77efa702f1f93fc6657b8e90b946b",
-        "export-sessions-bigquery": "c2cd594e859c25f8616a721ac5a9088cfd0df200bb10f32777a295740af3468a",
-        "firestore-bq-export-with-cls": "9fa4711fdfde12253bcd176fd204c8a68ed7ea167a8de17cb00011c7bcfe0564"
+        "firestore-bq-export-with-cls": "73529ed002806826d45600b12ee5cab179c131b87ad3c16a77a98d59eb0d1106"
       }
     }
   },
