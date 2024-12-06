@@ -50,6 +50,10 @@ export const bigQueryCreateViewSchema = (schema: any) => {
   logger.log(`$$$Creating BigQuery View Schema : ${JSON.stringify(schema)}`);
 };
 
+export const bigQueryPartitionFieldAddedToView = (schema: any) => {
+  logger.log(`$$$Partition Field added to View : ${JSON.stringify(schema)}`);
+};
+
 export const bigQueryTableAlreadyExists = (
   tableName: string,
   datasetName: string

@@ -25,6 +25,7 @@ import {
   oldDataField,
   documentPathParams,
   getClusteringFields,
+  getNewPartitionField,
 } from "./schema";
 import { latestConsistentSnapshotView } from "./snapshot";
 import handleFailedTransactions from "./handleFailedTransactions";
@@ -456,6 +457,10 @@ export class FirestoreBigQueryEventHistoryTracker
     const schema = RawChangelogViewSchema;
     const clusterFields = getClusteringFields(this.config);
 
+    const changelogName = this.rawChangeLogTableName();
+    const table = dataset.table(changelogName);
+    const partitioning = new Partitioning(this.config, table);
+
     if (viewExists) {
       logs.bigQueryViewAlreadyExists(view.id, dataset.id);
       const [metadata] = await view.getMetadata();
@@ -465,6 +470,11 @@ export class FirestoreBigQueryEventHistoryTracker
       }[];
       if (this.config.wildcardIds) {
         schema.fields.push(documentPathParams);
+      }
+
+      if (!!this.config.timePartitioning) {
+        schema.fields.push(getNewPartitionField(this.config));
+        logs.bigQueryPartitionFieldAddedToView(schema);
       }
 
       clusterFields.map((x) => schema.fields.push(x));
