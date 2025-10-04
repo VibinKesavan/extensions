@@ -1,3 +1,7 @@
+## Version 0.1.66
+
+Node.js runtime upgrade from Node 18 to Node 20 for improved performance and compatibility.
+
 ## Version 0.1.65
 
 Minor fix
