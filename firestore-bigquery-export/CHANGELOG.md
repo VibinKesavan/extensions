@@ -1,3 +1,7 @@
+## Version 0.1.67
+
+Fixed bug in `initializeRawChangeLogTable` where clustering fields were being incorrectly pushed to `fields.fields` instead of `fields` when updating existing tables. This caused "Cannot read properties of undefined (reading 'push')" error when initializing against existing BigQuery tables with clustering enabled.
+
 ## Version 0.1.66
 
 Node.js runtime upgrade from Node 18 to Node 20 for improved performance and compatibility.

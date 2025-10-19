@@ -379,7 +379,7 @@ export class FirestoreBigQueryEventHistoryTracker
 
       if (this.config.clustering) {
         getClusteringFields(this.config).map((x) => {
-          fields.fields.push(x);
+          fields.push(x);
           logs.addNewColumn(this.rawChangeLogTableName(), x.name);
         });
       }
