@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: firestore-bq-export-with-cls
-version: 0.1.68
+version: 0.1.69
 specVersion: v1beta
 
 displayName: Stream Firestore to BigQuery

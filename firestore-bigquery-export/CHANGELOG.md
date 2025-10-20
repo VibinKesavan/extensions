@@ -1,3 +1,7 @@
+## Version 0.1.69
+
+Fixed bug in `initializeRawChangeLogTable` where clustering fields were being added to existing table schemas without checking if they already exist. Added field existence check before adding clustering fields to prevent "Field already exists in schema" error when updating existing BigQuery tables with clustering enabled.
+
 ## Version 0.1.68
 
 Fixing version comment
