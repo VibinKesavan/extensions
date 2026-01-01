@@ -1,3 +1,7 @@
+## Version 0.1.72
+
+- Bumped extension version to 0.1.72.
+
 ## Version 0.1.71
 
 - Bumped extension version to 0.1.71 and added whitespace-tolerant validation for `DATABASE_ID` to allow `(default)` or named DBs while still catching empty values.
