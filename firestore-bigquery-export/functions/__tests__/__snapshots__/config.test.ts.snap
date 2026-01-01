@@ -42,8 +42,8 @@ Object {
   "param": "DATABASE_ID",
   "required": true,
   "type": "string",
-  "validationErrorMessage": "Provide \\"(default)\\" or a database ID containing letters, numbers, or hyphens.",
-  "validationRegex": "^(\\(default\\)|[A-Za-z0-9-]+)$",
+  "validationErrorMessage": "Provide a non-empty database ID.",
+  "validationRegex": "^.+$",
 }
 `;
 

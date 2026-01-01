@@ -185,10 +185,8 @@ params:
     type: string
     default: "unknown"
     required: true
-    validationRegex: '^\\s*(\\(default\\)|[A-Za-z0-9-]+)\\s*$'
-    validationErrorMessage: >-
-      Provide "(default)" or a database ID containing letters, numbers, or
-      hyphens. Whitespace is not allowed.
+    validationRegex: "^.+$"
+    validationErrorMessage: Provide a non-empty database ID.
 
   - param: COLLECTION_PATH
     label: Collection path
