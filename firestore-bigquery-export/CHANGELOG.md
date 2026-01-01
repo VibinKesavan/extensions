@@ -1,3 +1,8 @@
+## Version 0.1.70
+
+- Added `DATABASE_ID` parameter and trigger resource templating so installs can target named Firestore databases instead of always using `(default)`.
+- Config now reads `DATABASE_ID` from env to align triggers and runtime with the selected Firestore database.
+
 ## Version 0.1.69
 
 Fixed bug in `initializeRawChangeLogTable` where clustering fields were being added to existing table schemas without checking if they already exist. Added field existence check before adding clustering fields to prevent "Field already exists in schema" error when updating existing BigQuery tables with clustering enabled.

@@ -55,6 +55,14 @@ describe("extension config", () => {
     expect(config()).toMatchSnapshot(env);
   });
 
+  // DATABASE_ID
+  describe("config.databaseId", () => {
+    test("param exists", () => {
+      const extensionParam = extensionParams["DATABASE_ID"];
+      expect(extensionParam).toMatchSnapshot();
+    });
+  });
+
   // DATASET_ID
   describe("config.datasetId", () => {
     test("param exists", () => {

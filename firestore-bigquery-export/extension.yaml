@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: firestore-bq-export-with-cls
-version: 0.1.69
+version: 0.1.70
 specVersion: v1beta
 
 displayName: Stream Firestore to BigQuery
@@ -58,7 +58,7 @@ resources:
       runtime: nodejs20
       eventTrigger:
         eventType: providers/cloud.firestore/eventTypes/document.write
-        resource: projects/${param:PROJECT_ID}/databases/(default)/documents/${param:COLLECTION_PATH}/{documentId}
+        resource: projects/${param:PROJECT_ID}/databases/${param:DATABASE_ID}/documents/${param:COLLECTION_PATH}/{documentId}
 
   - name: syncBigQuery
     type: firebaseextensions.v1beta.function
@@ -175,6 +175,19 @@ params:
     type: string
     default: ${PROJECT_ID}
     required: true
+
+  - param: DATABASE_ID
+    label: Firestore database ID
+    description: >-
+      Which Firestore database should the extension listen to? Use "(default)"
+      for the primary database, or supply a database ID for multi-database
+      projects.
+    type: string
+    required: true
+    validationRegex: '^(\\(default\\)|[A-Za-z0-9-]+)$'
+    validationErrorMessage: >-
+      Provide "(default)" or a database ID containing letters, numbers, or
+      hyphens.
 
   - param: COLLECTION_PATH
     label: Collection path
