@@ -36,6 +36,7 @@ Object {
 
 exports[`extension config config.databaseId param exists 1`] = `
 Object {
+  "default": "unknown",
   "description": "Which Firestore database should the extension listen to? Use \\"(default)\\" for the primary database, or supply a database ID for multi-database projects.",
   "label": "Firestore database ID",
   "param": "DATABASE_ID",

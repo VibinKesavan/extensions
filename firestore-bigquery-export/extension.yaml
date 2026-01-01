@@ -183,6 +183,7 @@ params:
       for the primary database, or supply a database ID for multi-database
       projects.
     type: string
+    default: "unknown"
     required: true
     validationRegex: '^(\\(default\\)|[A-Za-z0-9-]+)$'
     validationErrorMessage: >-
