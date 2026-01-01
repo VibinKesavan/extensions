@@ -1,6 +1,6 @@
 import { getChangeType } from "../src/util";
 import * as functionsTestInit from "firebase-functions-test";
-import { ChangeType } from "@firebaseextensions/firestore-bigquery-change-tracker";
+import { ChangeType } from "../src/change-tracker";
 import { DocumentSnapshot } from "firebase-functions/lib/v1/providers/firestore";
 
 const functionsTest = functionsTestInit();

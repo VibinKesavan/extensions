@@ -1,6 +1,11 @@
+## Version 0.1.73
+
+- Bumped extension version to 0.1.73.
+- Added test guards and mocks for v2 handlers while preserving named-database support across triggers and runtime paths.
+
 ## Version 0.1.72
 
-- Bumped extension version to 0.1.72.
+- Migrated Cloud Functions to Firebase Functions v2 (GCF v2) for Firestore and Task Queue triggers, with gcfv2 platform enabled in the extension spec.
 
 ## Version 0.1.71
 

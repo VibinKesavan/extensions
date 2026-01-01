@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: firestore-bq-export-with-cls
-version: 0.1.72
+version: 0.1.73
 specVersion: v1beta
 
 displayName: Stream Firestore to BigQuery
@@ -56,6 +56,7 @@ resources:
       then exports the changes into BigQuery.
     properties:
       runtime: nodejs20
+      platform: gcfv2
       eventTrigger:
         eventType: providers/cloud.firestore/eventTypes/document.write
         resource: projects/${param:PROJECT_ID}/databases/${param:DATABASE_ID}/documents/${param:COLLECTION_PATH}/{documentId}
@@ -66,6 +67,7 @@ resources:
       A task-triggered function that gets called on BigQuery sync
     properties:
       runtime: nodejs20
+      platform: gcfv2
       taskQueueTrigger:
         rateLimits:
           maxConcurrentDispatches: 500
@@ -80,6 +82,7 @@ resources:
       Runs configuration for sycning with BigQuery
     properties:
       runtime: nodejs20
+      platform: gcfv2
       taskQueueTrigger:
         retryConfig:
           maxAttempts: 15
@@ -91,6 +94,7 @@ resources:
       Runs configuration for sycning with BigQuery
     properties:
       runtime: nodejs20
+      platform: gcfv2
       taskQueueTrigger:
         retryConfig:
           maxAttempts: 15
