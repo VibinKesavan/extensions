@@ -1,3 +1,7 @@
+## Version 0.1.73
+
+- Bumped extension version to 0.1.73.
+
 ## Version 0.1.72
 
 - Bumped extension version to 0.1.72.
