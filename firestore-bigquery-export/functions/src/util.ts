@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import { DocumentSnapshot } from "firebase-functions/lib/v1/providers/firestore";
+import { Change } from "firebase-functions";
+
 import { ChangeType } from "./change-tracker";
 
 /**
@@ -21,7 +24,7 @@ import { ChangeType } from "./change-tracker";
  * @param change Firestore document change object.
  * @returns {ChangeType} The type of change.
  */
-export function getChangeType(change: { before: any; after: any }): ChangeType {
+export function getChangeType(change: Change<DocumentSnapshot>): ChangeType {
   if (!change.after.exists) {
     return ChangeType.DELETE;
   }
@@ -36,7 +39,7 @@ export function getChangeType(change: { before: any; after: any }): ChangeType {
  * @param change Firestore document change object.
  * @returns {string} The document ID.
  */
-export function getDocumentId(change: { before: any; after: any }): string {
+export function getDocumentId(change: Change<DocumentSnapshot>): string {
   if (change.after.exists) {
     return change.after.id;
   }
